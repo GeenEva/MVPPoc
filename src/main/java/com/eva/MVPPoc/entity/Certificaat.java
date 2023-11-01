@@ -15,15 +15,15 @@ public class Certificaat {
     private Long certificaatId;
 
     private Integer certificaatNummer;
-    private String eigenaar;
+    private Long persoonId;
 
     public Certificaat() {
     }
 
-    public Certificaat(Long certificaatId, Integer certificaatNummer, String eigenaar) {
+    public Certificaat(Long certificaatId, Integer certificaatNummer, Long persoonId) {
         this.certificaatId = certificaatId;
         this.certificaatNummer = certificaatNummer;
-        this.eigenaar = eigenaar;
+        this.persoonId = persoonId;
     }
 
     public Long getCertificaatId() {
@@ -38,12 +38,12 @@ public class Certificaat {
         this.certificaatNummer = certificaatNummer;
     }
 
-    public String getEigenaar() {
-        return eigenaar;
+    public Long getPersoonId() {
+        return persoonId;
     }
 
-    public void setEigenaar(String eigenaar) {
-        this.eigenaar = eigenaar;
+    public void setPersoonId(Long eigenaar) {
+        this.persoonId = eigenaar;
     }
 
     @Override
@@ -51,12 +51,12 @@ public class Certificaat {
         if (this == o) return true;
         if (!(o instanceof Certificaat)) return false;
         Certificaat that = (Certificaat) o;
-        return getCertificaatId().equals(that.getCertificaatId()) && getCertificaatNummer().equals(that.getCertificaatNummer()) && getEigenaar().equals(that.getEigenaar());
+        return getCertificaatId().equals(that.getCertificaatId()) && getCertificaatNummer().equals(that.getCertificaatNummer()) && getPersoonId().equals(that.getPersoonId());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getCertificaatId(), getCertificaatNummer(), getEigenaar());
+        return Objects.hash(getCertificaatId(), getCertificaatNummer(), getPersoonId());
     }
 
     @Override
@@ -64,7 +64,7 @@ public class Certificaat {
         return "Certificaat{" +
                 "id=" + certificaatId +
                 ", certificaatNummer=" + certificaatNummer +
-                ", eigenaar='" + eigenaar + '\'' +
+                ", eigenaar='" + persoonId + '\'' +
                 '}';
     }
 }

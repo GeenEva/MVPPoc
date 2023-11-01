@@ -13,26 +13,26 @@ public class Persoon {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long persoonId;
 
-    private String name;
+    private String persoonNaam;
 
     public Persoon() {
     }
 
-    public Persoon(Long persoonId, String name) {
+    public Persoon(Long persoonId, String persoonNaam) {
         this.persoonId = persoonId;
-        this.name = name;
+        this.persoonNaam = persoonNaam;
     }
 
     public Long getPersoonId() {
         return persoonId;
     }
 
-    public String getName() {
-        return name;
+    public String getPersoonNaam() {
+        return persoonNaam;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setPersoonNaam(String name) {
+        this.persoonNaam = name;
     }
 
     @Override
@@ -40,19 +40,19 @@ public class Persoon {
         if (this == o) return true;
         if (!(o instanceof Persoon)) return false;
         Persoon persoon = (Persoon) o;
-        return getPersoonId().equals(persoon.getPersoonId()) && getName().equals(persoon.getName());
+        return getPersoonId().equals(persoon.getPersoonId()) && getPersoonNaam().equals(persoon.getPersoonNaam());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getPersoonId(), getName());
+        return Objects.hash(getPersoonId(), getPersoonNaam());
     }
 
     @Override
     public String toString() {
         return "Persoon{" +
                 "id=" + persoonId +
-                ", name='" + name + '\'' +
+                ", name='" + persoonNaam + '\'' +
                 '}';
     }
 }
