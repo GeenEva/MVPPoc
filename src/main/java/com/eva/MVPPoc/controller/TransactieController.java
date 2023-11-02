@@ -8,8 +8,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
-@RequestMapping("/transactions")
+@RequestMapping("/transactie")
 public class TransactieController {
 
     @Autowired
@@ -17,8 +19,8 @@ public class TransactieController {
 
     @RequestMapping("/transacties")
     public ResponseEntity<Transactie> getAllTransacties(){
-        transactieService.getAllTransacties();
-        return new ResponseEntity<>(HttpStatus.OK);
+        List<Transactie> allTransacties = transactieService.getAllTransacties();
+        return new ResponseEntity(allTransacties, HttpStatus.OK);
     }
 
 }

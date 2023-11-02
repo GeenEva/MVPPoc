@@ -9,6 +9,7 @@ import java.util.Objects;
 
 @Entity
 public class Persoon {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long persoonId;

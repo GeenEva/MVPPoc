@@ -28,7 +28,15 @@ ALTER SEQUENCE transactie_seq RESTART WITH 1;
 INSERT INTO mvppoc.public.persoon (persoon_naam)
 VALUES ('Alfie'),
        ('Bilbo'),
-       ('Chris') ;
+       ('Chris'),
+       ('Doris'),
+       ('Ellie'),
+       ('Fritzl'),
+       ('Gerard'),
+       ('Heini'),
+       ('Izaak'),
+       ('Jettie')
+       ;
 
 INSERT INTO mvppoc.public.persoon (persoon_naam)
 VALUES ('Damian');

@@ -14,9 +14,10 @@ public class TransactieServiceImpl implements TransactieService{
      private TransactieRepository repository;
 
      @Override
-     public void getAllTransacties() {
+     public List<Transactie> getAllTransacties() {
          List<Transactie> transactieList = repository.findAll();
          transactieList.forEach(System.out::println);
+         return transactieList;
      }
 
 }
