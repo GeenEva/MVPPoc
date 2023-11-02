@@ -21,6 +21,10 @@ CREATE TABLE certificaat (
                                  FOREIGN KEY (persoon_id) REFERENCES persoon(persoon_id)
 );
 
+ALTER SEQUENCE certificaat_seq RESTART WITH 1;
+ALTER SEQUENCE persoon_seq RESTART WITH 1;
+ALTER SEQUENCE transactie_seq RESTART WITH 1;
+
 INSERT INTO mvppoc.public.persoon (persoon_naam)
 VALUES ('Alfie'),
        ('Bilbo'),

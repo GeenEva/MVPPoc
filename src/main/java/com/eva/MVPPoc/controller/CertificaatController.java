@@ -18,6 +18,7 @@ public class CertificaatController {
     @Autowired
     private CertificaatService certificaatService;
 
+    @RequestMapping("/uploadCertificaten")
     public ResponseEntity<HttpEntity> uploadCertificatenRegister(
             @RequestParam("csvFile")MultipartFile csvFile){
         if(certificaatService.hasCsvFormat(csvFile)){
@@ -27,7 +28,8 @@ public class CertificaatController {
             return ResponseEntity.status(HttpStatus.OK)
                     .body(new HttpEntity<>("Certificaten opgeslagen in de database"));
         }
-        return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(new HttpEntity(""));
+        return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED)
+                .body(new HttpEntity("Failed to save certificaten to the database"));
     }
 
 

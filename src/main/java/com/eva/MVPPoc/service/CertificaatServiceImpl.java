@@ -2,6 +2,9 @@ package com.eva.MVPPoc.service;
 
 import com.eva.MVPPoc.entity.Certificaat;
 import com.eva.MVPPoc.repository.CertificaatRepository;
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVParser;
+import org.apache.commons.csv.CSVRecord;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -19,8 +22,9 @@ public class CertificaatServiceImpl implements CertificaatService {
     @Override
     public boolean hasCsvFormat(MultipartFile csvFile) {
         if(!"text/csv".equals(csvFile.getContentType())){
+            System.out.println("this is not a csv file");
             return false;}
-        return false;
+        return true;
     }
 
     @Override
@@ -38,40 +42,29 @@ public class CertificaatServiceImpl implements CertificaatService {
 
     private List<Certificaat> csvToCertificaten(InputStream inputStream) {
         List<Certificaat> certificaten = new ArrayList<>();
-        try { BufferedReader fileReader =
-            new BufferedReader( new InputStreamReader(inputStream, "UTF-8") );
 
+        try (BufferedReader fileReader = new BufferedReader(
+                new InputStreamReader(inputStream, "UTF-8"));
 
-            //todo implement
-
-            /*
-            CSVParser csvParser = new CSVParser(fileReader, CSVFormat.DEFAULT
-                     .builder().setSkipHeaderRecord(true)
-                     .setHeader("Index","Jaar","Maand","Optieplan")
+             CSVParser csvParser = new CSVParser(fileReader, CSVFormat.DEFAULT
+                     .builder()
+                     .setHeader("certificaatNummer", "persoonId")
                      .setSkipHeaderRecord(true)
                      .setDelimiter(";")
                      .setIgnoreHeaderCase(true)
-                     .build())) {
-            List<MaandCijfer> maandCijfers = new ArrayList<>();
+                     .build())
+        ) {
             List<CSVRecord> records = csvParser.getRecords();
-            for (CSVRecord csvRecord : records){
-                MaandCijfer maandCijfer =
-                        new MaandCijfer(Long.parseLong(csvRecord.get("Index")),
-                                csvRecord.get("Jaar"), csvRecord.get("Maand"),
-                                csvRecord.get("Optieplan"));
-                maandCijfers.add(maandCijfer);
+            for (CSVRecord csvRecord : records) {
+                Certificaat certificaat = new Certificaat(
+                        Integer.parseInt(csvRecord.get("certificaatNummer")),
+                        Long.parseLong(csvRecord.get("persoonId")));
+                certificaten.add(certificaat);
             }
-            return maandCijfers;
-             */
 
-
-
-
-        } catch (UnsupportedEncodingException e) {
-            throw new RuntimeException(e);
+            return certificaten;
+        } catch (IOException e) {
+            throw new RuntimeException();
         }
-
-
-        return certificaten;
     }
 }

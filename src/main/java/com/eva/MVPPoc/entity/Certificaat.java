@@ -20,6 +20,11 @@ public class Certificaat {
     public Certificaat() {
     }
 
+    public Certificaat(Integer certificaatNummer, Long persoonId) {
+        this.certificaatNummer = certificaatNummer;
+        this.persoonId = persoonId;
+    }
+
     public Certificaat(Long certificaatId, Integer certificaatNummer, Long persoonId) {
         this.certificaatId = certificaatId;
         this.certificaatNummer = certificaatNummer;
