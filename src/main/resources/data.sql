@@ -2,7 +2,8 @@ DROP TABLE IF EXISTS persoon, transactie, certificaat;
 
 CREATE TABLE persoon (
                          persoon_id SERIAL PRIMARY KEY ,
-                         persoon_naam VARCHAR(255) NOT NULL
+                         persoon_naam VARCHAR(255) NOT NULL,
+                         transactie_id INT
 );
 
 CREATE TABLE transactie (
@@ -10,6 +11,8 @@ CREATE TABLE transactie (
                             persoon_id INT NOT NULL,
                             koopt INT,
                             verkoopt INT,
+                            zet_om INT,
+                            zet_om_van_optieplan INT,
                             CONSTRAINT fk_persoon
                                 FOREIGN KEY (persoon_id) REFERENCES persoon(persoon_id)
 );
@@ -21,9 +24,9 @@ CREATE TABLE certificaat (
                                  FOREIGN KEY (persoon_id) REFERENCES persoon(persoon_id)
 );
 
-ALTER SEQUENCE certificaat_seq RESTART WITH 1;
-ALTER SEQUENCE persoon_seq RESTART WITH 1;
-ALTER SEQUENCE transactie_seq RESTART WITH 1;
+-- ALTER SEQUENCE certificaat_seq RESTART WITH 1;
+-- ALTER SEQUENCE persoon_seq RESTART WITH 1;
+-- ALTER SEQUENCE transactie_seq RESTART WITH 1;
 
 INSERT INTO mvppoc.public.persoon (persoon_naam)
 VALUES ('Alfie'),
@@ -38,12 +41,9 @@ VALUES ('Alfie'),
        ('Jettie')
        ;
 
-INSERT INTO mvppoc.public.persoon (persoon_naam)
-VALUES ('Damian');
-
-
-INSERT INTO mvppoc.public.transactie (persoon_id, koopt, verkoopt) VALUES
-                                                                       (2, 200, 0),
-                                                                       (1, 0, 200),
-                                                                       (3, 300, 0),
-                                                                       (4, 0, 300);
+INSERT INTO mvppoc.public.transactie (persoon_id, koopt, verkoopt)
+VALUES
+                     (2, 200, 0),
+                     (7, 0, 200),
+                     (1, 300, 0),
+                     (8, 0, 300);

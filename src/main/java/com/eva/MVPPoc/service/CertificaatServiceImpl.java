@@ -29,6 +29,7 @@ public class CertificaatServiceImpl implements CertificaatService {
 
     @Override
     public void processAndSafeData(MultipartFile csvFile) {
+/*
 
         try {
             List<Certificaat> certificaten = csvToCertificaten(csvFile.getInputStream());
@@ -37,10 +38,11 @@ public class CertificaatServiceImpl implements CertificaatService {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+*/
 
     }
 
-    private List<Certificaat> csvToCertificaten(InputStream inputStream) {
+/*    private List<Certificaat> csvToCertificaten(InputStream inputStream) {
         List<Certificaat> certificaten = new ArrayList<>();
 
         try (BufferedReader fileReader = new BufferedReader(
@@ -66,5 +68,5 @@ public class CertificaatServiceImpl implements CertificaatService {
         } catch (IOException e) {
             throw new RuntimeException();
         }
-    }
+    }*/
 }

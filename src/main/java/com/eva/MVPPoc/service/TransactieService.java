@@ -7,4 +7,6 @@ import java.util.List;
 public interface TransactieService {
 
     List<Transactie> getAllTransacties();
+
+
 }

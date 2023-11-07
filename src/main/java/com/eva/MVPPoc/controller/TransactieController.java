@@ -5,8 +5,7 @@ import com.eva.MVPPoc.service.TransactieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -17,10 +16,20 @@ public class TransactieController {
     @Autowired
     private TransactieService transactieService;
 
-    @RequestMapping("/transacties")
-    public ResponseEntity<Transactie> getAllTransacties(){
-        List<Transactie> allTransacties = transactieService.getAllTransacties();
-        return new ResponseEntity(allTransacties, HttpStatus.OK);
+
+    @GetMapping("/transacties")
+    public ResponseEntity<List<Transactie>> allTransacties(){
+        return new ResponseEntity<>(transactieService.getAllTransacties(), HttpStatus.OK);
     }
+
+    @PostMapping("/create")
+    public ResponseEntity createTransactie(@RequestParam int persoonId, @RequestBody Transactie transactie){
+
+    //todo implement
+
+        return new ResponseEntity(HttpStatus.OK);
+    }
+
+
 
 }
