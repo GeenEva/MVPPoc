@@ -1,6 +1,7 @@
 package com.eva.MVPPoc.service;
 
 import com.eva.MVPPoc.entity.Certificaat;
+import com.eva.MVPPoc.entity.Persoon;
 import com.eva.MVPPoc.repository.CertificaatRepository;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
@@ -19,6 +20,14 @@ public class CertificaatServiceImpl implements CertificaatService {
     @Autowired
     CertificaatRepository repository;
 
+
+    @Override
+    public List<Certificaat> getCertByPersoonId(int persoonId) {
+        List<Certificaat> certificaten = repository.getCertByPersoonId(persoonId);
+        return certificaten;
+    }
+
+
     @Override
     public boolean hasCsvFormat(MultipartFile csvFile) {
         if(!"text/csv".equals(csvFile.getContentType())){
@@ -29,7 +38,6 @@ public class CertificaatServiceImpl implements CertificaatService {
 
     @Override
     public void processAndSafeData(MultipartFile csvFile) {
-/*
 
         try {
             List<Certificaat> certificaten = csvToCertificaten(csvFile.getInputStream());
@@ -38,11 +46,12 @@ public class CertificaatServiceImpl implements CertificaatService {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-*/
 
     }
 
-/*    private List<Certificaat> csvToCertificaten(InputStream inputStream) {
+
+
+    private List<Certificaat> csvToCertificaten(InputStream inputStream) {
         List<Certificaat> certificaten = new ArrayList<>();
 
         try (BufferedReader fileReader = new BufferedReader(
@@ -58,9 +67,14 @@ public class CertificaatServiceImpl implements CertificaatService {
         ) {
             List<CSVRecord> records = csvParser.getRecords();
             for (CSVRecord csvRecord : records) {
-                Certificaat certificaat = new Certificaat(
-                        Integer.parseInt(csvRecord.get("certificaatNummer")),
-                        Long.parseLong(csvRecord.get("persoonId")));
+                Persoon persoon = new Persoon();
+                persoon.setPersoonId(Long.parseLong(csvRecord.get("persoonId")));
+
+                Certificaat certificaat =
+                        new Certificaat();
+                certificaat.setPersoonId(persoon);
+                certificaat.setCertificaatNummer(Integer.parseInt(csvRecord.get("certificaatNummer")));
+
                 certificaten.add(certificaat);
             }
 
@@ -68,5 +82,5 @@ public class CertificaatServiceImpl implements CertificaatService {
         } catch (IOException e) {
             throw new RuntimeException();
         }
-    }*/
+    }
 }

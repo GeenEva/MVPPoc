@@ -19,6 +19,7 @@ CREATE TABLE transactie (
 
 CREATE TABLE certificaat (
                              certificaat_id SERIAL PRIMARY KEY ,
+                             certificaat_nummer INT NOT NULL,
                              persoon_id INT NOT NULL ,
                              CONSTRAINT fk_persoon
                                  FOREIGN KEY (persoon_id) REFERENCES persoon(persoon_id)

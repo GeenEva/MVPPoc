@@ -1,10 +1,8 @@
 package com.eva.MVPPoc.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Data;
+import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 @Entity
@@ -16,10 +14,12 @@ public class Certificaat {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long certificaatId;
 
-
+    @Column
     private Integer certificaatNummer;
 
+    @ManyToOne
+    @JoinColumn(name = "persoon_id", nullable = false)
+    private Persoon persoonId;
 
-    private Long persoonId;
 
 }

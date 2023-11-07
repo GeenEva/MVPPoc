@@ -17,7 +17,6 @@ public class Persoon {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long persoonId;
 
-
     @Exclude
     @OneToMany(mappedBy = "persoon")
     @JsonIgnore
