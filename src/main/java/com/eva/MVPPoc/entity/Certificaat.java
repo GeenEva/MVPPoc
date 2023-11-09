@@ -14,12 +14,16 @@ public class Certificaat {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long certificaatId;
 
-    @Column
+
     private Integer certificaatNummer;
 
     @ManyToOne
     @JoinColumn(name = "persoon_id", nullable = false)
-    private Persoon persoonId;
+    private Persoon persoon;
+
+    @ManyToOne
+    @JoinColumn(name = "optieplan_id")
+    private Optieplan optieplan;
 
 
 }

@@ -1,6 +1,7 @@
 package com.eva.MVPPoc.service;
 
 import com.eva.MVPPoc.entity.Certificaat;
+import com.eva.MVPPoc.entity.Optieplan;
 import com.eva.MVPPoc.entity.Persoon;
 import com.eva.MVPPoc.repository.CertificaatRepository;
 import org.apache.commons.csv.CSVFormat;
@@ -41,6 +42,8 @@ public class CertificaatServiceImpl implements CertificaatService {
 
         try {
             List<Certificaat> certificaten = csvToCertificaten(csvFile.getInputStream());
+
+
             repository.saveAll(certificaten);
 
         } catch (IOException e) {
@@ -59,7 +62,7 @@ public class CertificaatServiceImpl implements CertificaatService {
 
              CSVParser csvParser = new CSVParser(fileReader, CSVFormat.DEFAULT
                      .builder()
-                     .setHeader("certificaatNummer", "persoonId")
+                     .setHeader("certificaatNummer", "persoonId", "optieplanId")
                      .setSkipHeaderRecord(true)
                      .setDelimiter(";")
                      .setIgnoreHeaderCase(true)
@@ -69,10 +72,12 @@ public class CertificaatServiceImpl implements CertificaatService {
             for (CSVRecord csvRecord : records) {
                 Persoon persoon = new Persoon();
                 persoon.setPersoonId(Long.parseLong(csvRecord.get("persoonId")));
+                Optieplan optieplan = new Optieplan();
+                optieplan.setOptieplanId(Long.parseLong(csvRecord.get("optieplanID")));
 
-                Certificaat certificaat =
-                        new Certificaat();
-                certificaat.setPersoonId(persoon);
+                Certificaat certificaat =  new Certificaat();
+                certificaat.setPersoon(persoon);
+                certificaat.setOptieplan(optieplan);
                 certificaat.setCertificaatNummer(Integer.parseInt(csvRecord.get("certificaatNummer")));
 
                 certificaten.add(certificaat);
