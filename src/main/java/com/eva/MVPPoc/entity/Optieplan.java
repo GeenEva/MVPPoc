@@ -2,7 +2,6 @@ package com.eva.MVPPoc.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
@@ -18,7 +17,7 @@ public class Optieplan {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long optieplanId;
 
-    private String optieplanNaam;
+    private Integer optieplanNaam;
 
     @ToString.Exclude
     @OneToMany(mappedBy = "optieplan")

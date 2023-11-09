@@ -23,7 +23,7 @@ public class CertificaatController {
     private CertificaatService certificaatService;
 
     @GetMapping("/byPersoonId")
-    public ResponseEntity<List<Certificaat>> getCertificaatByPersoonId(@RequestParam int persoonId){
+    public ResponseEntity<List<Certificaat>> getCertificatenByPersoonId(@RequestParam int persoonId){
         List<Certificaat> allCertificatenVanPersoon = certificaatService.getCertByPersoonId(persoonId);
         return new ResponseEntity<>(allCertificatenVanPersoon, HttpStatus.OK);
     }
