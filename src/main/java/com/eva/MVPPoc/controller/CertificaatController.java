@@ -24,8 +24,9 @@ public class CertificaatController {
 
     @RequestMapping("/uploadCertificaten")
     public ResponseEntity<HttpEntity> uploadCertificatenRegister(
-            @RequestParam("csvFile")MultipartFile csvFile){
-        certificaatService.processAndSafeCertificatenFromCSV(csvFile);
+            @RequestParam("csvFile") List<MultipartFile> csvFiles){
+        csvFiles.forEach( file ->
+            certificaatService.processAndSafeCertificatenFromCSV(file));
         return ResponseEntity.status(HttpStatus.OK)
                 .body(new HttpEntity<>("Certificaten opgeslagen in de database"));
 
