@@ -6,9 +6,9 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 
 public interface CertificaatService {
-    boolean hasCsvFormat(MultipartFile csvFile);
 
-    void processAndSafeData(MultipartFile csvFile);
+
+    public void processAndSafeCertificatenFromCSV(MultipartFile csvFile);
 
     List<Certificaat> getCertByPersoonId(int persoonId);
 

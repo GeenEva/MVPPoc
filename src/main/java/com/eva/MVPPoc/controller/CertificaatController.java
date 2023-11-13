@@ -22,26 +22,22 @@ public class CertificaatController {
     @Autowired
     private CertificaatService certificaatService;
 
+    @RequestMapping("/uploadCertificaten")
+    public ResponseEntity<HttpEntity> uploadCertificatenRegister(
+            @RequestParam("csvFile")MultipartFile csvFile){
+        certificaatService.processAndSafeCertificatenFromCSV(csvFile);
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(new HttpEntity<>("Certificaten opgeslagen in de database"));
+
+    }
+
+
     @GetMapping("/byPersoonId")
     public ResponseEntity<List<Certificaat>> getCertificatenByPersoonId(@RequestParam int persoonId){
         List<Certificaat> allCertificatenVanPersoon = certificaatService.getCertByPersoonId(persoonId);
         return new ResponseEntity<>(allCertificatenVanPersoon, HttpStatus.OK);
     }
 
-
-    @RequestMapping("/uploadCertificaten")
-    public ResponseEntity<HttpEntity> uploadCertificatenRegister(
-            @RequestParam("csvFile")MultipartFile csvFile){
-        if(certificaatService.hasCsvFormat(csvFile)){
-
-            certificaatService.processAndSafeData(csvFile);
-
-            return ResponseEntity.status(HttpStatus.OK)
-                    .body(new HttpEntity<>("Certificaten opgeslagen in de database"));
-        }
-        return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED)
-                .body(new HttpEntity("Failed to save certificaten to the database"));
-    }
 
     @RequestMapping("/registerPerOptieplan")
     public ResponseEntity<List<Certificaat>> getCertificaatRegisterPerOptieplan(@RequestParam int optieplanNaam){
