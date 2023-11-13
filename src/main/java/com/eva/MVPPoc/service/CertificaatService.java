@@ -11,4 +11,6 @@ public interface CertificaatService {
     void processAndSafeData(MultipartFile csvFile);
 
     List<Certificaat> getCertByPersoonId(int persoonId);
+
+    List<Certificaat> getCertificaatRegisterPerOptieplan(int optieplanNaam);
 }

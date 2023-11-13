@@ -43,7 +43,11 @@ public class CertificaatController {
                 .body(new HttpEntity("Failed to save certificaten to the database"));
     }
 
+    @RequestMapping("/registerPerOptieplan")
+    public ResponseEntity<List<Certificaat>> getCertificaatRegisterPerOptieplan(@RequestParam int optieplanNaam){
 
-
+        List<Certificaat> allCertificatenVanPersoon = certificaatService.getCertificaatRegisterPerOptieplan(optieplanNaam);
+        return new ResponseEntity<>(allCertificatenVanPersoon, HttpStatus.OK);
+    }
 
 }

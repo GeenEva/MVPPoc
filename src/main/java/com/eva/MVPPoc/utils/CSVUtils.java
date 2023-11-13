@@ -1,70 +1,32 @@
-package com.eva.MVPPoc.service;
+package com.eva.MVPPoc.utils;
 
 import com.eva.MVPPoc.entity.Certificaat;
 import com.eva.MVPPoc.entity.Optieplan;
 import com.eva.MVPPoc.entity.Persoon;
-import com.eva.MVPPoc.repository.CertificaatRepository;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-@Service
-public class CertificaatServiceImpl implements CertificaatService {
-
-    @Autowired
-    CertificaatRepository repository;
+public class CSVUtils {
 
 
-    @Override
-    public List<Certificaat> getCertByPersoonId(int persoonId) {
-        List<Certificaat> certificaten = repository.getCertByPersoonId(persoonId);
-        return certificaten;
-    }
-
-
-    @Override
-    public List<Certificaat> getCertificaatRegisterPerOptieplan(int optieplanNaam) {
-        List<Certificaat> certificaten = repository.getCertificaatRegisterPerOptieplan(optieplanNaam);
-        return certificaten;
-    }
-
-
-
-
-
-    @Override
-    public boolean hasCsvFormat(MultipartFile csvFile) {
+    public static boolean hasCsvFormat(MultipartFile csvFile) {
         if(!"text/csv".equals(csvFile.getContentType())){
             System.out.println("this is not a csv file");
             return false;}
         return true;
     }
 
-    @Override
-    public void processAndSafeData(MultipartFile csvFile) {
 
-        try {
-            List<Certificaat> certificaten = csvToCertificaten(csvFile.getInputStream());
-
-
-            repository.saveAll(certificaten);
-
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-    }
-
-
-
-    private List<Certificaat> csvToCertificaten(InputStream inputStream) {
+    public static List<Certificaat> csvToCertificaten(InputStream inputStream) {
         List<Certificaat> certificaten = new ArrayList<>();
 
         try (BufferedReader fileReader = new BufferedReader(
@@ -98,4 +60,5 @@ public class CertificaatServiceImpl implements CertificaatService {
             throw new RuntimeException();
         }
     }
+
 }
