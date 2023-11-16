@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.annotations.FetchProfile;
+import org.hibernate.engine.profile.Fetch;
 
 @Entity
 @Data
@@ -22,7 +24,7 @@ public class Certificaat {
     private Persoon persoon;
 
     @ManyToOne
-    @JoinColumn(name = "optieplan_id")
+    @JoinColumn(name = "optieplan_id", nullable = false)
     private Optieplan optieplan;
 
 

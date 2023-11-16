@@ -11,24 +11,20 @@ import java.util.List;
 @Entity
 @Data
 @RequiredArgsConstructor
-public class Optieplan {
+public class TransactieMoment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long optieplanId;
+    private Long transactieMomentId;
 
-    private Integer optieplanNaam;
 
-    @ToString.Exclude
-    @JsonIgnore
-    @OneToMany(mappedBy = "optieplan")
-    private List<Certificaat> certificaten;
+    @OneToOne
+    @JoinColumn(name = "optieplan_id", nullable = false)
+    private Optieplan optieplan;
 
 
     @ToString.Exclude
     @JsonIgnore
-    @OneToOne(mappedBy = "optieplan", optional = true)
-    private TransactieMoment transactieMoment;
-
-
+    @OneToMany(mappedBy = "transactieMoment")
+    private List<Transactie> transacties;
 }

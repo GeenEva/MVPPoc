@@ -30,6 +30,11 @@ public class TransactieController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
+  /*  TODO: IMPLEMENT THIS FUNCTIONALITY
+  @RequestMapping("/getByTransactieMomentId")
+    public ResponseEntity<List<Transactie>> getTransactiesByTransactieMomentId(@RequestParam int transactieMomentId){
+        return new ResponseEntity<>(transactieService.getTransactieByTransactieMomentId(transactieMomentId), HttpStatus.OK);
+    }*/
 
 
 }

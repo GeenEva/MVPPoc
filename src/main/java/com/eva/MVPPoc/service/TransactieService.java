@@ -9,4 +9,5 @@ public interface TransactieService {
     List<Transactie> getAllTransacties();
 
 
+    List<Transactie> getTransactieByTransactieMomentId(int transactieMomentId);
 }

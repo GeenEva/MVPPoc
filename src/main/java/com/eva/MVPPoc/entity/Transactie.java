@@ -14,6 +14,10 @@ public class Transactie {
     private Long transactieId;
 
     @ManyToOne
+    @JoinColumn(name = "transactie_moment_id", nullable = false)
+    private TransactieMoment transactieMoment;
+
+    @ManyToOne
     @JoinColumn(name="persoon_id", nullable = false)
     private Persoon persoon;
 
