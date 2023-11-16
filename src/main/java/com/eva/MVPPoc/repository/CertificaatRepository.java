@@ -10,7 +10,7 @@ import java.util.List;
 @Repository
 public interface CertificaatRepository extends JpaRepository<Certificaat, Long> {
 
-    @Query(value = "SELECT * from CERTIFICAAT WHERE persoon_id = ?1", nativeQuery = true)
+    @Query(value = "SELECT * from mvppoc.public.certificaat WHERE persoon_id = ?1", nativeQuery = true)
     List<Certificaat> getCertByPersoonId(int persoonId);
 
 

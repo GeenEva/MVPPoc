@@ -18,10 +18,10 @@ public class TransactieServiceImpl implements TransactieService{
          return repository.findAll();
      }
 
-    @Override
-    public List<Transactie> getTransactieByTransactieMomentId(int transactieMomentId) {
-       // repository.getTransactieByTransactieMomentId(transactieId);
-        return null;
+     @Override
+     public List<Transactie> getTransactiesByOptieplanNaam(int optieplanNaam) {
+
+        return repository.getTransactiesByOptieplanNaam(optieplanNaam);
     }
 
 

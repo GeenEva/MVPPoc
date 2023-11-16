@@ -40,7 +40,7 @@ public class CertificaatController {
     }
 
 
-    @RequestMapping("/registerPerOptieplan")
+    @RequestMapping("/getRegisterPerOptieplan")
     public ResponseEntity<List<Certificaat>> getCertificaatRegisterPerOptieplan(@RequestParam int optieplanNaam){
 
         List<Certificaat> allCertificatenVanPersoon = certificaatService.getCertificaatRegisterPerOptieplan(optieplanNaam);

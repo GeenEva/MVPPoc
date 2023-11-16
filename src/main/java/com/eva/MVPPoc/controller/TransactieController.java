@@ -17,11 +17,6 @@ public class TransactieController {
     private TransactieService transactieService;
 
 
-    @GetMapping("/transacties")
-    public ResponseEntity<List<Transactie>> allTransacties(){
-        return new ResponseEntity<>(transactieService.getAllTransacties(), HttpStatus.OK);
-    }
-
     @PostMapping("/create")
     public ResponseEntity createTransactie(@RequestParam int persoonId, @RequestBody Transactie transactie){
 
@@ -30,11 +25,15 @@ public class TransactieController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
-  /*  TODO: IMPLEMENT THIS FUNCTIONALITY
-  @RequestMapping("/getByTransactieMomentId")
-    public ResponseEntity<List<Transactie>> getTransactiesByTransactieMomentId(@RequestParam int transactieMomentId){
-        return new ResponseEntity<>(transactieService.getTransactieByTransactieMomentId(transactieMomentId), HttpStatus.OK);
-    }*/
 
+    @RequestMapping("/getByOptieplanNaam")
+    public ResponseEntity<List<Transactie>> getTransactiesByOptieplanNaam(@RequestParam int optieplanNaam){
+        return new ResponseEntity<>(transactieService.getTransactiesByOptieplanNaam(optieplanNaam), HttpStatus.OK);
+    }
+
+    @GetMapping("/transacties")
+    public ResponseEntity<List<Transactie>> allTransacties(){
+        return new ResponseEntity<>(transactieService.getAllTransacties(), HttpStatus.OK);
+    }
 
 }
