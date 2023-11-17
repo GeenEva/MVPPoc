@@ -11,4 +11,5 @@ public interface TransactieService {
     List<Transactie> getTransactiesByOptieplanNaam(int transactieMomentId);
 
 
+    List<Transactie> updateToegewezenTransacties(List<Transactie> transactieData);
 }

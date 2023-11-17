@@ -24,8 +24,14 @@ public class TransactieController {
     }
 
     @RequestMapping("/getByOptieplanNaam")
-    public ResponseEntity<List<Transactie>> getTransactiesByOptieplanNaam(@RequestParam int optieplanNaam){
+    public ResponseEntity getTransactiesByOptieplanNaam(@RequestParam int optieplanNaam){
         return new ResponseEntity<>(transactieService.getTransactiesByOptieplanNaam(optieplanNaam), HttpStatus.OK);
+    }
+
+    @PutMapping("/updateToegewezen")
+    public ResponseEntity updateToegewezenTransacties(@RequestBody List<Transactie> transactieData){
+
+        return new ResponseEntity((transactieService.updateToegewezenTransacties(transactieData)), HttpStatus.OK);
     }
 
 
