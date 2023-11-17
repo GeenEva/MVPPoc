@@ -10,7 +10,7 @@ import lombok.RequiredArgsConstructor;
 public class Transactie {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long transactieId;
 
     @ManyToOne

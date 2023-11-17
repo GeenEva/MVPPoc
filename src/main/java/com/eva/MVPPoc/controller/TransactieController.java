@@ -18,22 +18,15 @@ public class TransactieController {
 
 
     @PostMapping("/create")
-    public ResponseEntity createTransactie(@RequestParam int persoonId, @RequestBody Transactie transactie){
+    public ResponseEntity createTransacties(@RequestBody List<Transactie> transactieData){
 
-    //todo implement
-
-        return new ResponseEntity(HttpStatus.OK);
+        return new ResponseEntity(transactieService.createTransactiesFromTransactieData(transactieData),HttpStatus.OK);
     }
-
 
     @RequestMapping("/getByOptieplanNaam")
     public ResponseEntity<List<Transactie>> getTransactiesByOptieplanNaam(@RequestParam int optieplanNaam){
         return new ResponseEntity<>(transactieService.getTransactiesByOptieplanNaam(optieplanNaam), HttpStatus.OK);
     }
 
-    @GetMapping("/transacties")
-    public ResponseEntity<List<Transactie>> allTransacties(){
-        return new ResponseEntity<>(transactieService.getAllTransacties(), HttpStatus.OK);
-    }
 
 }

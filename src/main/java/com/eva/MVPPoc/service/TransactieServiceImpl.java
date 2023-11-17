@@ -13,16 +13,21 @@ public class TransactieServiceImpl implements TransactieService{
      @Autowired
      private TransactieRepository repository;
 
+
      @Override
-     public List<Transactie> getAllTransacties() {
-         return repository.findAll();
+     public List<Transactie> createTransactiesFromTransactieData(List<Transactie> transactieData) {
+
+         return repository.saveAll(transactieData);
      }
+
 
      @Override
      public List<Transactie> getTransactiesByOptieplanNaam(int optieplanNaam) {
 
         return repository.getTransactiesByOptieplanNaam(optieplanNaam);
-    }
+     }
+
+
 
 
 }

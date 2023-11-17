@@ -6,8 +6,9 @@ import java.util.List;
 
 public interface TransactieService {
 
-    List<Transactie> getAllTransacties();
-
+    List<Transactie> createTransactiesFromTransactieData(List<Transactie> transactieData);
 
     List<Transactie> getTransactiesByOptieplanNaam(int transactieMomentId);
+
+
 }
