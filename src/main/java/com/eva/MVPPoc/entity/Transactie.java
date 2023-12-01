@@ -14,20 +14,20 @@ public class Transactie {
     private Long transactieId;
 
     @ManyToOne
-    @JoinColumn(name = "transactie_moment_id", nullable = false)
-    private TransactieMoment transactieMoment;
+    @JoinColumn(name = "optieplan_id", nullable = false)
+    private Optieplan optieplan;
 
     @ManyToOne
     @JoinColumn(name="persoon_id", nullable = false)
     private Persoon persoon;
 
-    private Integer koopt;
+    private String typeToewijzing;
 
-    private Integer verkoopt;
+    private Integer aantal;
 
-    private Integer zetOm;
-
-    private String zetOmVanOptieplan;
+    @ManyToOne
+    @JoinColumn(name = "zetOmVanOptieplan", nullable = true)
+    private Optieplan zetOmVanOptieplan;
 
 
 }

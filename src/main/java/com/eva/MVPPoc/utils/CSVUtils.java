@@ -49,7 +49,7 @@ public class CSVUtils {
 
                 Certificaat certificaat =  new Certificaat();
                 certificaat.setPersoon(persoon);
-                certificaat.setOptieplan(optieplan);
+                certificaat.setOptieplanBijAankoop(optieplan);
                 certificaat.setCertificaatNummer(Integer.parseInt(csvRecord.get("certificaatNummer")));
 
                 certificaten.add(certificaat);

@@ -15,14 +15,14 @@ public interface CertificaatRepository extends JpaRepository<Certificaat, Long> 
 
 
     @Query(value =
-            "SELECT DISTINCT ON(a.certificaat_nummer) certificaat_id, certificaat_nummer, persoon_id, a.optieplan_id  From mvppoc.public.certificaat\n" +
+            "SELECT DISTINCT ON(a.certificaat_nummer) certificaat_id, certificaat_nummer, persoon_id, a.optieplan_bij_aankoop  From mvppoc.public.certificaat\n" +
                     "AS a\n" +
                     " LEFT JOIN mvppoc.public.optieplan AS b\n" +
-                    " ON a.optieplan_id=b.optieplan_id\n" +
+                    " ON a.optieplan_bij_aankoop=b.optieplan_id\n" +
                     "\n" +
                     "WHERE b.optieplan_naam<=?1\n" +
                     "\n" +
-                    "group by certificaat_id, certificaat_nummer, a.optieplan_id, persoon_id, b.optieplan_id, optieplan_naam\n" +
+                    "group by certificaat_id, certificaat_nummer, a.optieplan_bij_aankoop, persoon_id, b.optieplan_id, optieplan_naam\n" +
                     "order by certificaat_nummer, optieplan_naam desc ;", nativeQuery = true)
     List<Certificaat> getCertificaatRegisterPerOptieplan(int optieplanNaam);
 }

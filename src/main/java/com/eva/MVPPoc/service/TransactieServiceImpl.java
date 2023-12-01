@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -16,7 +15,14 @@ public class TransactieServiceImpl implements TransactieService{
      private TransactieRepository repository;
 
 
-     @Override
+    @Override
+    public List<Transactie> getAllTransacties() {
+        return repository.findAll();
+    }
+
+
+
+    @Override
      public List<Transactie> createTransactiesFromTransactieData(List<Transactie> transactieData) {
 
          return repository.saveAll(transactieData);
@@ -30,15 +36,16 @@ public class TransactieServiceImpl implements TransactieService{
      }
 
     @Override
-    public List<Transactie> updateToegewezenTransacties(List<Transactie> transactieData) {
+    public List<Transactie> updateTransacties(List<Transactie> transactieData) {
         //TODO: stoute Optional negerende code aanpassen
         return repository.saveAll(
                  transactieData.stream()
                          .map(transactie -> {
                              Transactie byId = repository.findById(transactie.getTransactieId()).get();
-                             byId.setKoopt(transactie.getKoopt());
-                             byId.setVerkoopt(transactie.getVerkoopt());
-                             byId.setZetOm(transactie.getZetOm());
+                             byId.setTypeToewijzing(transactie.getTypeToewijzing());
+                             byId.setAantal(transactie.getAantal());
+                             byId.setOptieplan(transactie.getOptieplan());
+                             byId.setPersoon(transactie.getPersoon());
                              byId.setZetOmVanOptieplan(transactie.getZetOmVanOptieplan());
                             return byId;
                          })

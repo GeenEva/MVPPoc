@@ -1,4 +1,4 @@
-DROP  TABLE IF EXISTS certificaat, transactie, transactie_moment, optieplan, persoon CASCADE;
+DROP  TABLE IF EXISTS certificaat, transactie, optieplan, persoon CASCADE;
 
 CREATE TABLE persoon (
                          persoon_id SERIAL PRIMARY KEY ,
@@ -10,37 +10,36 @@ CREATE TABLE optieplan (
                         optieplan_naam INT UNIQUE NOT NULL
 );
 
-CREATE TABLE transactie_moment (
-                        transactie_moment_id SERIAL PRIMARY KEY,
-                        optieplan_id INT NOT NULL,
-                        CONSTRAINT fk_optieplan
-                         FOREIGN KEY (optieplan_id) REFERENCES optieplan(optieplan_id)
-);
 
 CREATE TABLE transactie (
                         transactie_id SERIAL PRIMARY KEY ,
-                        transactie_moment_id INT NOT NULL ,
+                        optieplan_id INT NOT NULL ,
                         persoon_id INT NOT NULL,
-                        koopt INT,
-                        verkoopt INT,
-                        zet_om INT,
-                        zet_om_van_optieplan varchar,
+                        type_toewijzing varchar,
+                        aantal INT,
+                        zet_om_van_optieplan INT,
                         CONSTRAINT fk_persoon
                          FOREIGN KEY (persoon_id) REFERENCES persoon(persoon_id),
-                        CONSTRAINT fk_transactie_moment
-                         FOREIGN KEY (transactie_moment_id) REFERENCES transactie_moment(transactie_moment_id)
-);
+                        CONSTRAINT fk_optieplan
+                         FOREIGN KEY (optieplan_id) REFERENCES optieplan(optieplan_id),
+                        CONSTRAINT fk_zet_om_van_optieplan
+                        FOREIGN KEY (zet_om_van_optieplan) REFERENCES optieplan(optieplan_id)
+
+                        );
 
 
 CREATE TABLE certificaat (
                              certificaat_id SERIAL PRIMARY KEY ,
                              certificaat_nummer INT NOT NULL,
-                             optieplan_id INT NOT NULL ,
+                             optieplan_bij_aankoop INT NOT NULL ,
+                             optieplan_bij_verkoop INT ,
                              persoon_id INT NOT NULL ,
                              CONSTRAINT fk_persoon
                                  FOREIGN KEY (persoon_id) REFERENCES persoon(persoon_id),
-                             CONSTRAINT fk_optieplan
-                                FOREIGN KEY (optieplan_id) REFERENCES optieplan(optieplan_id)
+                             CONSTRAINT fk_optieplan_bij_aankoop
+                                FOREIGN KEY (optieplan_bij_aankoop) REFERENCES optieplan(optieplan_id),
+                             CONSTRAINT fk_optieplan_bij_verkoop
+                                FOREIGN KEY (optieplan_bij_verkoop) REFERENCES optieplan(optieplan_id)
 );
 
 
@@ -64,20 +63,21 @@ INSERT INTO optieplan (optieplan_naam) VALUES
                                            (20022),
                                            (20031),
                                            (20032),
-                                           (20041)
+                                           (20041),
+                                           (20042)
 ;
 
-INSERT INTO mvppoc.public.transactie_moment (transactie_moment_id, optieplan_id)
-VALUES
-    (1,1), (2,2), (3,3), (4,4), (5,5), (6,6), (7,7);
 
 INSERT INTO mvppoc.public.transactie
-    (transactie_moment_id, persoon_id, koopt, verkoopt, zet_om, zet_om_van_optieplan)
+    (optieplan_id, persoon_id, type_toewijzing, aantal, zet_om_van_optieplan)
 VALUES
-                     (1, 2, 200,   0, 100, '2012.2'),
-                     (1, 3,   0, 200,   0, '0'),
-                     (1, 7,   0, 300,   0, '0'),
-                     (1, 1, 300,   0,   0, '0'),
-                     (2, 8,   0, 300,   0, '0'),
-                     (2, 3, 300,   0, 500, '2019.1');
+                     (1, 2, 'VERKOPEN',   100, 1),
+                     (1, 3,  'AANKOPEN',  100, 1),
+                     (1, 7,   'VERKOPEN', 300,  1),
+                     (1, 1, 'AANKOPEN',   300, 1),
+                     (2, 8,   'VERKOPEN', 400,  2),
+                     (2, 3, 'AANKOPEN',   400, 2);
+
+
+
 

@@ -14,21 +14,21 @@ import java.util.List;
 public class Optieplan {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long optieplanId;
 
     private Integer optieplanNaam;
 
     @ToString.Exclude
     @JsonIgnore
-    @OneToMany(mappedBy = "optieplan")
+    @OneToMany(mappedBy = "optieplanBijAankoop")
     private List<Certificaat> certificaten;
+
 
 
     @ToString.Exclude
     @JsonIgnore
-    @OneToOne(mappedBy = "optieplan", optional = true)
-    private TransactieMoment transactieMoment;
-
+    @OneToMany(mappedBy = "optieplan")
+    private List<Transactie> transacties;
 
 }

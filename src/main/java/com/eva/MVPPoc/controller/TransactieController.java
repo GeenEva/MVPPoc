@@ -17,7 +17,17 @@ public class TransactieController {
     private TransactieService transactieService;
 
 
-    @PostMapping("/create")
+    @GetMapping("/alleTransacties")
+    private ResponseEntity getAlleTransacties(){
+
+        return new ResponseEntity<>(transactieService.getAllTransacties(), HttpStatus.OK);
+    }
+
+
+
+
+
+   /* @PostMapping("/create")
     public ResponseEntity createTransacties(@RequestBody List<Transactie> transactieData){
 
         return new ResponseEntity(transactieService.createTransactiesFromTransactieData(transactieData),HttpStatus.OK);
@@ -31,8 +41,8 @@ public class TransactieController {
     @PutMapping("/updateToegewezen")
     public ResponseEntity updateToegewezenTransacties(@RequestBody List<Transactie> transactieData){
 
-        return new ResponseEntity((transactieService.updateToegewezenTransacties(transactieData)), HttpStatus.OK);
-    }
+        return new ResponseEntity((transactieService.updateTransacties(transactieData)), HttpStatus.OK);
+    }*/
 
 
 }

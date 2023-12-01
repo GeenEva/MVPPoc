@@ -6,10 +6,15 @@ import java.util.List;
 
 public interface TransactieService {
 
+
+    List<Transactie> getAllTransacties();
+
+
     List<Transactie> createTransactiesFromTransactieData(List<Transactie> transactieData);
 
     List<Transactie> getTransactiesByOptieplanNaam(int transactieMomentId);
 
 
-    List<Transactie> updateToegewezenTransacties(List<Transactie> transactieData);
+    List<Transactie> updateTransacties(List<Transactie> transactieData);
+
 }

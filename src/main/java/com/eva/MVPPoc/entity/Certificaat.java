@@ -2,10 +2,7 @@ package com.eva.MVPPoc.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
-import org.hibernate.annotations.FetchProfile;
-import org.hibernate.engine.profile.Fetch;
 
 @Entity
 @Data
@@ -13,7 +10,7 @@ import org.hibernate.engine.profile.Fetch;
 public class Certificaat {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long certificaatId;
 
 
@@ -24,8 +21,13 @@ public class Certificaat {
     private Persoon persoon;
 
     @ManyToOne
-    @JoinColumn(name = "optieplan_id", nullable = false)
-    private Optieplan optieplan;
+    @JoinColumn(name = "optieplan_bij_aankoop", nullable = false)
+    private Optieplan optieplanBijAankoop;
+
+    @ManyToOne
+    @JoinColumn(name = "optieplan_bij_verkoop", nullable = true)
+    private Optieplan optieplanBijVerkoop;
+
 
 
 }
